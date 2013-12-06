@@ -8,7 +8,7 @@ int termNumber[100];//termNumber[i] = number of terms in test case i
 char termValue_string[100][500];//termValue[i]=string of testcase i
 int termValue[100][100]; //termValue[i][k] = value of term k in test case i
 int termPointer=0;//pointer of term number in a test case
-char *next_token = NULL;
+
 char seps[]=" ,\n";
 char *token;//store the token of termValue_string[i]
 long int memberSum=0;
@@ -28,7 +28,7 @@ int getInfo(){//store input information in termNumber and termValue
 }
 int enterNumber(){//enter number
 	termValue[testPointer][termPointer]=atoi(token);
-	token=strtok_s(NULL,seps,&next_token);
+	token=strtok(NULL,seps);
 	termPointer++;
 	if(token!=NULL){
 		enterNumber();
@@ -37,14 +37,8 @@ int enterNumber(){//enter number
 }
 int getNumber(){//extract numbers from string str and store them in termValue[testPointer][termPointer]
 	if(testPointer<testNumber){
-		token=strtok_s(termValue_string[testPointer],seps,&next_token);
-		/*while(p!=NULL){
-			termValue[testPointer][termPointer]=atoi(p);
-			p=strtok_s(NULL,seps,&next_token);
-			termPointer++;
-		}*/
+		token=strtok(termValue_string[testPointer],seps);
 		enterNumber();
-		*(next_token)=NULL;
 		termPointer=0;
 		testPointer++;
 	}
@@ -63,7 +57,7 @@ int printResult_case(int testPointer){//print the sum of testcase testPointer
 	}
 	else{
 		termPointer=0;
-		fprintf(stdout,"%d\n",memberSum);
+		fprintf(stdout,"%ld\n",memberSum);
 		memberSum=0;
 		return 1;
 	}
@@ -86,22 +80,7 @@ void main(){
 	testNumber=atoi(buffer);
 	getInfo();
 	getNumber();
-	/*printf("you entered: %d\n");
-	for(i=0;i<testNumber;i++){
-		for(k=0;k<termNumber[i];k++){
-			printf("%d ",termValue[i][k]);
-		}
-	}*/
 	printSum();
 	getchar();
-	/*char p[256];
-	char *stri;
-	fgets(p,256,stdin);
-	stri=strtok_s(p,seps,&next_token);
-	while(stri!=NULL){
-		printf("%d ",atoi(stri));
-		stri=strtok_s(NULL,seps,&next_token);
-	}
 
-	getchar();*/
 }
