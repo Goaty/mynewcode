@@ -13,9 +13,9 @@ char seps[]=" ,\n";
 char *token;//store the token of termValue_string[i]
 long int memberSum=0;
 int getInfo(){//store input information in termNumber and termValue
-	char termNumber_string[10];
+	char termNumber_string[100];
 	if(testPointer<testNumber){
-		fgets(termNumber_string,10,stdin);
+		fgets(termNumber_string,100,stdin);
 		termNumber[testPointer]=atoi(termNumber_string);
 		fgets(termValue_string[testPointer],500,stdin);
 		testPointer++;
@@ -81,8 +81,8 @@ int printSum(){//print all the sums
 	printSum();
 }
 void main(){
-	char buffer[3];//string for number of testcases
-	fgets(buffer, 3,stdin);
+	char buffer[256];//string for number of testcases
+	fgets(buffer, 256,stdin);
 	testNumber=atoi(buffer);
 	getInfo();
 	getNumber();
